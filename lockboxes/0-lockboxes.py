@@ -1,9 +1,11 @@
 #!/user/bin/python3
+
+
 """Module: defintion of function to open lock boxes"""
 
 
 def canUnlockAll(boxes):
-"""opening provided boxes"""
+    """opening provided boxes"""
     keys = list(boxes[0])
     unlocked = {0}
 
@@ -14,4 +16,3 @@ def canUnlockAll(boxes):
             keys.extend(boxes[key])
 
     return len(unlocked) == len(boxes)
-
