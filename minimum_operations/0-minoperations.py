@@ -1,4 +1,4 @@
-#!/usr/bin/env python 3
+#!/usr/bin/python3
 """Module: Find the minimum operations"""
 
 def minOperations(n):
