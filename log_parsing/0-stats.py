@@ -24,7 +24,6 @@ def capture_lines():
                 if i == 10:
                     print_stats(status_code, file_size)
                     i = 0
-                    status_code.clear()
             else:
                 continue
     except KeyboardInterrupt:
