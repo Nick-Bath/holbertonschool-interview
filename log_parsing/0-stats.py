@@ -20,6 +20,9 @@ def capture_lines():
             line = line.strip()
             if re.match(input_format, line):
                 split_line.append(line.split())
+                if not split_line[0][7].isdigit():
+                    split_line.clear()
+                    continue
                 status_code.append(split_line[0][7])
                 file_size = file_size + int(split_line[0][8])
                 split_line.clear()
