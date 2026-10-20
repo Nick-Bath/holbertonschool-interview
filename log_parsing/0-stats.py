@@ -28,6 +28,7 @@ def capture_lines():
                         status_code.clear()
                 else:
                     continue
+            print(status_code, file_size)
     except KeyboardInterrupt:
         print_stats(status_code, file_size)
 
