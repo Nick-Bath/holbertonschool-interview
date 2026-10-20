@@ -6,9 +6,11 @@ import sys
 
 def capture_lines():
     """Captures stdin lines"""
-    input_format = r"^\d{1,3}(\.\d{1,3}){3} "
+    input_format = (
+    r"^\d{1,3}(\.\d{1,3}){3} "
     r"- \[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}(\.\d{1,6})?\] "
     r"\"GET /projects/260 HTTP/1\.1\" \d{3} \d{1,4}$"
+    )
 
     i = 0
     split_line = []
@@ -20,9 +22,6 @@ def capture_lines():
             line = line.strip()
             if re.match(input_format, line):
                 split_line.append(line.split())
-                if not split_line[0][7].isdigit():
-                    split_line.clear()
-                    continue
                 status_code.append(split_line[0][7])
                 file_size = file_size + int(split_line[0][8])
                 split_line.clear()
