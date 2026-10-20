@@ -13,24 +13,25 @@ def capture_lines():
     file_size = 0
 
     try:
-        while True:
-            for line in sys.stdin:
-                line = line.strip()
-                if re.match(input_format, line):
-                    split_line.append(line.split())
-                    status_code.append(split_line[0][7])
-                    file_size = file_size + int(split_line[0][8])
-                    split_line.clear()
-                    i += 1
-                    if i == 10:
-                        print_stats(status_code, file_size)
-                        i = 0
-                        status_code.clear()
-                else:
-                    continue
-            print(status_code, file_size)
+        for line in sys.stdin:
+            line = line.strip()
+            if re.match(input_format, line):
+                split_line.append(line.split())
+                status_code.append(split_line[0][7])
+                file_size = file_size + int(split_line[0][8])
+                split_line.clear()
+                i += 1
+                if i == 10:
+                    print_stats(status_code, file_size)
+                    i = 0
+                    status_code.clear()
+            else:
+                continue
     except KeyboardInterrupt:
+        pass
+    finally:
         print_stats(status_code, file_size)
+        
 
 
 def print_stats(status_code, file_size):
