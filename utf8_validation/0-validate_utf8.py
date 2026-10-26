@@ -9,8 +9,9 @@ def validUTF8(data):
     valid_bool = False
 
     for int in data:
-        if int < 128:
+        if 0 < int < 255:
             valid_bool = True
         else:
-            valid_bool = False
+            binary = f"{int:b}"
+            return False
     return valid_bool
