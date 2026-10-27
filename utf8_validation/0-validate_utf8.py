@@ -4,17 +4,18 @@
 
 
 def validUTF8(data):
-    """Validate data for correct utf8 format"""
+    """converts data into binary and checks starting 4 bits"""
+    counter = 0
 
-    valid_bool = False
-
-    for int in data:
-        if 0 < int < 255:
-            valid_bool = True
-        else:
-            char_int = chr(int)
-            if len(char_int.encode('utf-8')) <= 4:
-               valid_bool = True
-            else:
+    for int in data:    
+        binary = f"{int:b}"
+        print(f"{int} = {binary}")
+        for bit in binary[:4]:
+            print(f"!{bit}!")
+            if bit == '1':
+                counter += 1
+            print(counter)
+            if len(data) > counter:
                 return False
-    return valid_bool
+        data.remove(int)    
+    return True  
