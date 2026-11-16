@@ -31,5 +31,3 @@ def makeChange(coins, total):
         return -1
 
     return coin_counter
-
-print(makeChange([2, 3], 383601))
