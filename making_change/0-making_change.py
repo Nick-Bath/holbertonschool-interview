@@ -9,6 +9,9 @@ def makeChange(coins, total):
     if total <= 0:
         return 0
 
+    if coins is None:
+        return -1
+
     sorted_coins = sorted(coins, reverse=True)
     coin_counter = 0
     current_change = total
@@ -29,3 +32,4 @@ def makeChange(coins, total):
 
     return coin_counter
 
+print(makeChange([2, 3], 383601))
