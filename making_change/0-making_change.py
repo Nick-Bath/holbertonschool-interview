@@ -5,29 +5,12 @@
 
 
 def makeChange(coins, total):
-    """runs through coins to find lowest amount to get total"""
-    if total <= 0:
-        return 0
+    min_coins = [total + 1] * (total + 1)
+    min_coins[0] = 0
 
-    if coins is None:
-        return -1
-
-    sorted_coins = sorted(coins, reverse=True)
-    coin_counter = 0
-    current_change = total
-
-    while current_change != 0:
-        if sorted_coins[0] < total:
-            current_change -= sorted_coins[0]
-            coin_counter += 1
-        for coin in sorted_coins:
-            if current_change % coin == 0:
-                coin_counter += current_change // coin
-                current_change -= coin * current_change / coin
-                return coin_counter
-            elif coin < current_change:
-                current_change -= coin
-                coin_counter += 1
-        return -1
-
-    return coin_counter
+    for i in range(1, total + 1):
+        for c in coins:
+            if i - c >= 0:
+                min_coins[i] = min(min_coins[i], 1 + min_coins[i-c])
+            
+    return min_coins[-1] if min_coins[-1] != total + 1 else -1 
