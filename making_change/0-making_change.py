@@ -5,6 +5,8 @@
 
 
 def makeChange(coins, total):
+    if total <= 0:
+        return 0
     min_coins = [total + 1] * (total + 1)
     min_coins[0] = 0
 
