@@ -11,14 +11,23 @@ def island_perimeter(grid):
         j = 0
         for col in row:
             if col == 1:
-                if grid[i - 1][j] == 0:
+                try:
+                    if grid[i - 1][j] == 0:
+                        perimeter += 1
+                    if grid[i + 1][j] == 0:
+                        perimeter += 1
+                    if grid[i][j - 1] == 0:
+                        perimeter += 1
+                    if grid[i][j + 1] == 0:
+                        perimeter += 1
+                except IndexError:
+                    if grid[i][j - 1] == 0:
+                        perimeter += 1
+                    if grid[i][j + 1] == 0:
+                        perimeter += 1
                     perimeter += 1
-                if grid[i + 1][j] == 0:
-                    perimeter += 1
-                if grid[i][j - 1] == 0:
-                    perimeter += 1
-                if grid[i][j + 1] == 0:
-                    perimeter += 1
+                    print("index error")
+                print(i, j, perimeter)
             j += 1
         i += 1
 
