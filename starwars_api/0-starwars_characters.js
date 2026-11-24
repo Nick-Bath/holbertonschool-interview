@@ -8,8 +8,7 @@ function get (url) {
   return new Promise((resolve, reject) => {
     request(url, (error, response, body) => {
       if (error) {
-        console.error(error);
-        return;
+        return reject(error);
       }
       resolve(JSON.parse(body));
     });
@@ -17,10 +16,18 @@ function get (url) {
 }
 
 async function printChars () {
-  const data = await get(url);
-  for (const api of data.characters) {
-    const char = await get(api);
-    console.log(char.name);
+  try {
+    const data = await get(url);
+    if (!data.characters) {
+      console.error('Film not found');
+      return;
+    }
+    for (const api of data.characters) {
+      const char = await get(api);
+      console.log(char.name);
+    }
+  } catch (error) {
+    console.error(error);
   }
 }
 
