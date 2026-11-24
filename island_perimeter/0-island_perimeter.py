@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 
-def island_perimeter(grid):
+"""Calculate perimeter of an island"""
 
+def island_perimeter(grid):
+    """loop through grid to find land"""
     perimeter = 0
     i = 0
 
