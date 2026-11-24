@@ -1,23 +1,27 @@
 #!/usr/bin/node
 
-async function getData (id) {
-  try {
-    const response = await fetch(`https://swapi-api.hbtn.io/api/films/${id}`);
+const request = require('request');
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
+const url = `https://swapi-api.hbtn.io/api/films/${process.argv[2]}`;
 
-    const data = await response.json();
+function get (url) {
+  return new Promise((resolve, reject) => {
+    request(url, (error, response, body) => {
+      if (error) {
+        console.error(error);
+        return;
+      }
+      resolve(JSON.parse(body));
+    });
+  });
+}
 
-    for (const url of data.characters) {
-      const res = await fetch(url);
-      const character = await res.json();
-      console.log(character.name);
-    }
-  } catch (error) {
-    console.error('Fetch failed:', error);
+async function printChars () {
+  const data = await get(url);
+  for (const api of data.characters) {
+    const char = await get(api);
+    console.log(char.name);
   }
 }
 
-getData(process.argv[2]);
+printChars();
