@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 
+
 """Calculate perimeter of an island"""
+
 
 def island_perimeter(grid):
     """loop through grid to find land"""
